@@ -1,0 +1,522 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN" ng-app="myApp" ng-controller="pwd_resetController as pwd_reset">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>加密货币交易平台</title>
+<meta name="keywords" content="比特币交易平台,比特币,BTC,比特币价格,比特币行情,USDT,莱特币,BCH,以太坊,ETH,以太经典" />
+<meta name="description" content="比特币交易平台,莱特币(LTC),以太坊(ETH),比特币现金(BCH),以太经典(ETC)达世币(DASH)等虚拟货币以比特币(BTC)、USDT进行交易！提供实时比特币价格,比特币行情。" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="css/languages.min.css">
+
+<style>
+.navbar {
+    margin-bottom: 0px;
+    background-color: #0e6bc9;
+    z-index: 9999;
+    border: 0;
+    font-size: 14px !important;
+    line-height: 1.42857143 !important;
+    letter-spacing: 2px;
+    border-radius: 0;
+    min-height: 60px;
+}
+
+.navbar-brand {
+  padding: 0 15px;
+  height: 60px;
+  line-height: 60px;
+}
+
+.navbar-toggle {
+  /* (80px - button height 34px) / 2 = 23px */
+  margin-top: 13px;
+  padding: 9px 10px !important;
+  border-color: transparent;
+  color: #fff !important;
+}
+@media (min-width: 768px) {
+  .navbar-nav > li > a {
+    /* (80px - line-height of 27px) / 2 = 16.5px */
+    padding-top: 16.5px;
+    padding-bottom: 16.5px;
+    line-height: 27px;
+  }
+}
+
+/* navbar */
+.navbar-default {
+    background-color: #0e6bc9;
+    border-color: #E7E7E7;
+}
+
+/* Title */
+.navbar-default .navbar-brand {
+    color: white;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    color: black;
+}
+/* Link */
+.navbar-default .navbar-nav > li > a {
+    color: white;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: black;
+    background-color: #0b8ee5;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    color: black;
+    background-color: #0b8ee5;
+}
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+    color: black;
+    background-color: #0b8ee5;
+}
+/* Caret */
+.navbar-default .navbar-nav > .dropdown > a .caret {
+    border-top-color: white;
+    border-bottom-color: white;
+}
+.navbar-default .navbar-nav > .dropdown > a:hover .caret,
+.navbar-default .navbar-nav > .dropdown > a:focus .caret {
+    border-top-color: black;
+    border-bottom-color: black;
+}
+.navbar-default .navbar-nav > .open > a .caret,
+.navbar-default .navbar-nav > .open > a:hover .caret,
+.navbar-default .navbar-nav > .open > a:focus .caret {
+    border-top-color: #555;
+    border-bottom-color: #555;
+}
+/* Mobile version */
+.navbar-default .navbar-toggle {
+    border-color: #DDD;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+    background-color: #0b8ee5;
+}
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #CCC;
+}
+@media (max-width: 767px) {
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+        color: white;
+    }
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+          color: black;
+    }
+}
+
+#langBtn {
+  background-color: #0e6bc9;
+  color: white;
+  border-style: none;
+}
+
+.navbar-default .navbar-nav > .dropdown:hover #langBtn {
+  background-color:  #0b8ee5;
+  border-style: none;
+}
+
+
+#settingModal {
+	 margin-top: 80px;
+}
+.table-responsive {
+ background-color: #fff !important;
+}
+tr:nth-child(even) {
+    background-color: #f7f8f9 !important;
+}
+
+.container {
+   margin: auto !important;
+    width: 80% !important;
+    }
+
+#pwd_Reset_Box {
+  margin-top: 120px !important;
+  margin-bottom: 200px !important;
+    }
+#pwd_Reset_Note {  
+     margin-top: 30px !important;
+     margin-left:40px !important;
+}
+    
+
+.footer {
+background-color: #f5f5f5;
+ color: #999 ;}
+#page-footer a {
+color: inherit}
+#page-footer a:hover {
+color: #666;
+text-decoration: underline}
+.footer-content {
+padding: 45px 0;
+margin-left: -15px;
+margin-right: -15px;}
+.footer-content .footer-content-block {
+width: 25%;
+float: left;
+padding-left: 15px;
+padding-right: 15px;}
+.footer-content .footer-content-block > h4 {
+margin: 0;
+color: #66bb6a;
+font-size: 1em;
+font-weight: 700;
+padding-bottom: 12px;
+letter-spacing: -0.02em;}
+.footer-content p {
+padding-top: 5px;
+ line-height: 30px;
+margin: 0}
+.footer-content .footer-content-block > ul {
+margin: 0;
+padding: 0;
+ list-style: none}
+.footer-content .footer-content-block > ul > li {
+padding-top: 10px}
+.footer-content + .footer-credit {
+border-top: 1px solid #ccc}
+.footer-credit {
+font-size: 12px;
+padding: 25px 0;}
+.footer-credit h5 {
+font-size: inherit;
+color: inherit;
+float: left;
+font-weight: 400;
+margin: 0;}
+.footer-credit-links {
+float: right}
+.footer-credit-links p {
+float: left;
+ margin: 0}
+.footer-credit-links ul {
+float: left;
+list-style: none;
+padding: 0;
+margin: 0 0 0 3px}
+.footer-credit-links ul > li {
+float: left}
+.footer-credit-links ul > li + li:before {
+content: ' ';
+display: inline-block;
+ vertical-align: baseline;
+ margin: 0 3px}
+ 
+@media (max-width: 766px) {
+.desktop-only {
+display: none !important;}
+#pwd_Reset_Box {
+  margin-top: 50px !important;
+  margin-bottom: 50px !important;
+    }
+#pwd_Reset_Note {  
+     margin-top: 30px !important;
+     margin-left:0px !important;
+}
+       
+}
+</style>
+</head>
+<body>
+<!-- header -->
+<!-- header -->
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Bitcoin</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="ordinaryTransaction.html">普通交易<span class="sr-only">(current)</span></a></li>
+        <li><a href="#">币币交易</a></li>
+        <li><a href="#">发布广告</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="login.html">登录</a></li>
+        <li><a href="register.html">注册</a></li>
+	  <li id="settingBtn"><a href="#"><span class="glyphicon glyphicon-cog" ></span></a></li>
+        <li class="dropdown">
+         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+          <button type="button" class="btn btn-default btn-sm" id="langBtn"><span class="lang-sm" lang="zh"></span></button><span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#"><span class="lang-sm lang-lbl" lang="en"></span></a></li>
+            <li><a href="#"><span class="lang-sm lang-lbl" lang="ja"></span></a></li>
+            <li><a href="#"><span class="lang-sm lang-lbl" lang="ko"></span></a></li>
+            <li><a href="#"><span class="lang-sm lang-lbl" lang="ru"></span></a></li>
+            <li><a href="#"><span class="lang-sm lang-lbl" lang="vi"></span></a></li>
+          </ul>
+
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<!-- header -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="settingModal" role="dialog">
+    <div class="modal-dialog">
+   
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">设置</h4>
+        </div>
+        <div class="modal-body">
+		  <div class="form-group">
+          <label for="currency">折算货币</label>
+          <select class="form-control" id="currency">
+          <option>美元</option>
+          <option>人民币</option>
+          <option>韩元</option>
+           <option>欧元</option>
+		   <option>英镑</option>
+		   <option>卢布</option>
+           </select>
+          </div>
+		  <div class="form-group">
+          <p>主题</p>
+          <form>
+          <label class="radio-inline">
+          <input type="radio" name="optradio">黑色
+          </label>
+          <label class="radio-inline">
+          <input type="radio" name="optradio">白色
+          </label>
+          </form>
+          </div>
+      </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">确定</button>
+        </div>
+      </div>
+     
+    </div>
+  </div>
+
+<!-- header -->
+
+<!-- login box -->
+<div class="container" id= "pwd_Reset_Box"   >
+<h2>重置登录密码</h2>
+
+<div class="row" >
+<div class="col-sm-6 col-md-6" >
+  <form action="/action_page.php"  name="registerForm" novalidate>
+ 
+   
+    <div class="form-group" ng-class="{ 'has-error' : registerForm.user_password.$dirty && registerForm.user_password.$invalid }">
+        <p class="help-text"><b>登录密码</b></p>
+        <input type="password" class="form-control" id="user_password" name="user_password" placeholder="输入密码" ng-minlength = "8" ng-maxlength = "40"  style="max-width: 400px;" ng-required="true" ng-model="user.user_password" password-verify="{{user.confirm_password}}" ng-change="pwd_reset.analyze(user.user_password)">
+        <div  class="help-block" ng-messages="registerForm.user_password.$error" ng-if="registerForm.user_password.$dirty">
+          <div ng-style="pwd_reset.passwordStrength"><p ng-cloak style="margin-left: 35px">{{ pwd_reset.pwdStrength}}</p></div>
+          <p ng-message="required">请输入密码</p>
+          <p ng-message="minlength">密码太短</p>
+          <p ng-message="maxlength">密码太长</p>
+        </div>
+      </div>
+      <div class="form-group" ng-class="{ 'has-error' : registerForm.confirm_password.$dirty && registerForm.confirm_password.$invalid }">
+        <p class="help-text"><b>确认密码</b></p>
+        <input class="form-control" id="confirm_password" ng-model="user.confirm_password" name="confirm_password" type="password" placeholder="输入密码" ng-minlength = "8" ng-maxlength = "40" style="max-width: 400px;" ng-required="true" password-verify="{{user.user_password}}">
+        <div class="help-block" ng-messages="registerForm.confirm_password.$error" ng-if="registerForm.confirm_password.$dirty">
+          <p ng-message="required">请输入密码</p>
+          <p ng-message="minlength">密码太短</p>
+          <p ng-message="maxlength">密码太长</p>
+          <p ng-message="passwordVerify">密码不匹配</p>
+        </div>
+      </div>
+     
+    <button type="submit" class="btn btn-success" name="submit" >提交</button>
+  </form>
+</div>
+
+<div class="col-sm-6 col-md-6" >
+<div id ="pwd_Reset_Note">
+<P>重置登录密码后24小时内禁止提币。</P>
+
+</div>
+</div>
+
+</div>
+</div>
+<!-- login box -->
+
+
+<div class="footer">
+<div class="container">
+<footer id="page-footer">
+    <div class="page-container">
+  <div class="footer-content clearfix">
+     <div class="footer-content-block desktop-only">
+   <h4>服务</h4>
+   <ul>
+    <li><a href="#" title="行业报告">行业报告</a></li>
+<li><a href="#" title="币种介绍">币种介绍</a></li>
+<li><a href="#" title="常见问题">常见问题</a></li>
+<li><a href="#" title="使用教程">使用教程</a></li>
+<li><a href="#" title="公告">公告</a></li>
+  </ul>
+     </div>
+     
+      <div class="footer-content-block desktop-only">
+   <h4>工具</h4>
+   <ul>
+    <li><a href="#" title="客户端下载">客户端下载</a></li>
+<li><a href="#" title="帮助中心">帮助中心</a></li>
+<li><a href="#" title="API文档">API文档</a></li>
+<li><a href="#" title="数字资产介绍">数字资产介绍</a></li>
+<li><a href="#" title="新手引导">新手引导</a></li>
+   </ul>
+     </div>
+     
+     <div class="footer-content-block desktop-only">
+   <h4>关于</h4>
+   <ul>
+    <li><a href="#" title="关于火币">关于火币</a></li>
+<li><a href="#" title="联系我们">联系我们</a></li>
+<li><a href="#" title="加入我们">加入我们</a></li>
+<li><a href="#" title="上币申请">上币申请</a></li>
+   </ul>
+     </div>
+           
+           
+     <div class="footer-content-block">
+   <h4>条款说明</h4>
+    <ul>
+<li><a href="#" title="用户协议">用户协议</a></li>
+<li><a href="#" title="隐私条款">隐私条款</a></li>
+<li><a href="#" title="法律声明">法律声明</a></li>
+   </ul>
+     </div>
+  </div>
+  <div class="footer-credit clearfix ">
+     <h5>www.chaojichaxun.com 版权所有</h5>
+  </div>     
+    </div>
+ </footer>
+</div>
+</div>
+<script>
+$('ul.nav li.dropdown').hover(function() {
+  $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(200);
+}, function() {
+  $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(200);
+});
+</script>
+ 
+<!-- Libraries -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-messages/1.5.7/angular-messages.min.js"></script>
+<script>
+angular.module('myApp', ['ngMessages'])
+.controller('pwd_resetController',['$scope',pwd_resetController])
+.directive('passwordVerify', passwordVerify);
+
+function pwd_resetController($http) {
+  var vm = this;
+
+  vm.strongRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
+  vm.mediumRegex = /^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})/;
+  vm.pwdStrength = "";
+  vm.passwordStrength = {
+                    "width": "80px",
+                    "color": "black"
+                };
+
+vm.analyze = function (value) {
+                    if(vm.strongRegex.test(value)) {
+                        vm.passwordStrength["background-color"] = "green";
+                        vm.pwdStrength = "强";
+                    } else if(vm.mediumRegex.test(value)) {
+                        vm.passwordStrength["background-color"] = "orange";
+                        vm.pwdStrength = "中";
+                    } else {
+                        vm.passwordStrength["background-color"] = "red";
+                        vm.pwdStrength = "弱";
+                       
+                    }
+                }
+
+ 
+vm.load = function (){
+  $http({
+        url: "https://www.w3schools.com/angular/customers.php",
+        method: "GET",
+ 
+    })
+    .then(function mySuccess(response) {
+       vm.myData = response.data.records;
+    },
+    function myError(response) {
+        alert(response.statusText);
+    });
+   }
+    
+}
+
+function passwordVerify() {
+    return {
+      restrict: 'A', // only activate on element attribute
+      require: '?ngModel', // get a hold of NgModelController
+      link: function(scope, elem, attrs, ngModel) {
+        if (!ngModel) return; // do nothing if no ng-model
+
+        // watch own value and re-validate on change
+        scope.$watch(attrs.ngModel, function() {
+          validate();
+        });
+
+        // observe the other value and re-validate on change
+        attrs.$observe('passwordVerify', function(val) {
+          validate();
+        });
+
+        var validate = function() {
+          // values
+          var val1 = ngModel.$viewValue;
+          var val2 = attrs.passwordVerify;
+
+          // set validity
+          ngModel.$setValidity('passwordVerify', val1 === val2);
+        };
+      }
+    }
+  }
+
+</script>
+</body>
+</html>

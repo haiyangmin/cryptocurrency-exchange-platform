@@ -1,0 +1,253 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN" ng-app="myApp" ng-controller="myAppController as myApp" ng-init="myApp.load()">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>加密货币交易平台</title>
+<meta name="keywords" content="比特币交易平台,比特币,BTC,比特币价格,比特币行情,USDT,莱特币,BCH,以太坊,ETH,以太经典" />
+<meta name="description" content="比特币交易平台,莱特币(LTC),以太坊(ETH),比特币现金(BCH),以太经典(ETC)达世币(DASH)等虚拟货币以比特币(BTC)、USDT进行交易！提供实时比特币价格,比特币行情。" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/main.css">
+<link rel="stylesheet" type="text/css" href="css/languages.min.css">
+</head>
+<body>
+<!-- header -->
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Bitcoin</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="ordinaryTransaction.html">普通交易<span class="sr-only">(current)</span></a></li>
+        <li><a href="#">币币交易</a></li>
+        <li><a href="#">发布广告</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="login.html">登录</a></li>
+      <li><a href="register.html">注册</a></li>
+	  <li id="settingBtn"><a href="#"><span class="glyphicon glyphicon-cog" ></span></a></li>
+        <li class="dropdown">
+         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+          <button type="button" class="btn btn-default btn-sm" id="langBtn"><span class="lang-sm" lang="zh"></span></button><span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#"><span class="lang-sm lang-lbl" lang="en"></span></a></li>
+            <li><a href="#"><span class="lang-sm lang-lbl" lang="ja"></span></a></li>
+            <li><a href="#"><span class="lang-sm lang-lbl" lang="ko"></span></a></li>
+            <li><a href="#"><span class="lang-sm lang-lbl" lang="ru"></span></a></li>
+            <li><a href="#"><span class="lang-sm lang-lbl" lang="vi"></span></a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<!-- header --> 
+
+
+<!-- Modal -->
+<div class="modal fade" id="settingModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">设置</h4>
+        </div>
+        <div class="modal-body">
+		  <div class="form-group">
+          <label for="currency">折算货币</label>
+          <select class="form-control" id="currency">
+          <option>美元</option>
+          <option>人民币</option>
+          <option>韩元</option>
+           <option>欧元</option>
+		   <option>英镑</option>
+		   <option>卢布</option>
+           </select>
+          </div>
+		  <div class="form-group">
+          <p>主题</p>
+          <form>
+          <label class="radio-inline">
+          <input type="radio" name="optradio">黑色
+          </label>
+          <label class="radio-inline">
+          <input type="radio" name="optradio">白色
+          </label>
+          </form>
+          </div>
+      </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">确定</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+<script>
+$(document).ready(function(){
+    $("#settingBtn").click(function(){
+        $("#settingModal").modal();
+    });
+});
+</script>
+
+<!-- AdBox --> 
+<div>
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+      <li data-target="#myCarousel" data-slide-to="3"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+      <div class="item active">
+        <img src="images/1.jpg" alt="Bitcon" style="width:100%;">
+      </div>
+
+      <div class="item">
+        <img src="images/2.jpg" alt="Bitcash" style="width:100%;">
+      </div>
+    
+      <div class="item">
+        <img src="images/3.jpg" alt="ETH" style="width:100%;">
+      </div>
+      <div class="item">
+        <img src="images/4.jpg" alt="注册" style="width:100%;">
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- AdBox --> 
+
+
+<!-- Table --> 
+<div class="container" > 
+   <div class="table-responsive" ng-show="myApp.table">
+   <table class="table table-bordered" id="tableHead">
+       <thead>
+      <tr>
+       <th id="USDT" ng-click="myApp.changeTradingPair($event)" ng-mousemove="myApp.changeCursor($event)">USDT</th>
+       <th id="BTC" ng-click="myApp.changeTradingPair($event)" ng-mousemove="myApp.changeCursor($event)">BTC</th>
+       <th id="ETH" ng-click="myApp.changeTradingPair($event)" ng-mousemove="myApp.changeCursor($event)">ETH</th>
+       <th id="HT" ng-click="myApp.changeTradingPair($event)" ng-mousemove="myApp.changeCursor($event)">HT</th>
+       <th id="自选" ng-click="myApp.changeTradingPair($event)" ng-mousemove="myApp.changeCursor($event)">自选</th>
+     </tr>
+     </thead>
+   </table>
+   <table id="myTable" class="table table-bordered" >
+   <thead>
+      <tr>
+       <th>交易对</th>
+       <th>最新价</th>
+       <th>涨幅</th>
+       <th>最高价</th>
+       <th>最低价</th>
+       <th>24H量</th>
+     </tr>
+     </thead>
+     <tbody>
+     <tr ng-repeat="x in myApp.tradingPair[0]">
+       <td>{{ x }}</td>
+       <td></td>
+       <td></td>
+       <td></td>
+       <td></td>
+       <td></td>
+     </tr>
+     </tbody>
+   </table>
+  </div>
+</div>
+<!-- Table --> 
+<div class="footer">
+<div class="container">
+<footer id="page-footer">
+    <div class="page-container">
+  <div class="footer-content clearfix">
+     <div class="footer-content-block desktop-only">
+   <h4>服务</h4>
+   <ul>
+    <li><a href="#" title="行业报告">行业报告</a></li>
+<li><a href="#" title="币种介绍">币种介绍</a></li> 
+<li><a href="#" title="常见问题">常见问题</a></li> 
+<li><a href="#" title="使用教程">使用教程</a></li>
+<li><a href="#" title="公告">公告</a></li>
+  </ul>
+     </div>
+     
+      <div class="footer-content-block desktop-only">
+   <h4>工具</h4>
+   <ul>
+    <li><a href="#" title="客户端下载">客户端下载</a></li>
+<li><a href="#" title="帮助中心">帮助中心</a></li>
+<li><a href="#" title="API文档">API文档</a></li>
+<li><a href="#" title="数字资产介绍">数字资产介绍</a></li>
+<li><a href="#" title="新手引导">新手引导</a></li>
+   </ul>
+     </div>
+     
+     <div class="footer-content-block desktop-only">
+   <h4>关于</h4>
+   <ul>
+    <li><a href="#" title="关于火币">关于火币</a></li>
+<li><a href="#" title="联系我们">联系我们</a></li>
+<li><a href="#" title="加入我们">加入我们</a></li>
+<li><a href="#" title="上币申请">上币申请</a></li>
+   </ul>
+     </div>
+           
+           
+     <div class="footer-content-block">
+   <h4>条款说明</h4>
+    <ul>
+<li><a href="#" title="用户协议">用户协议</a></li>
+<li><a href="#" title="隐私条款">隐私条款</a></li>
+<li><a href="#" title="法律声明">法律声明</a></li>
+   </ul>
+     </div>
+  </div>
+  <div class="footer-credit clearfix ">
+     <h5>www.shangma.com 版权所有</h5>
+  </div>      
+    </div>
+ </footer>
+</div>
+</div>
+<script>
+$('ul.nav li.dropdown').hover(function() {
+  $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(200);
+}, function() {
+  $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(200);
+});
+</script>
+ 
+<!-- Libraries -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
