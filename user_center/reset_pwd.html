@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="zh-CN" ng-app="myApp" ng-controller="myAppController as myApp" ng-init="myApp.load()">
+<html lang="zh-CN" ng-app="myApp" ng-controller="loginController as login">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>加密货币交易平台</title>
@@ -10,11 +10,12 @@
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="../libs/jquery.min.js"></script>
 <!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="css/main.css">
-<link rel="stylesheet" type="text/css" href="css/languages.min.css">
+<script src="../libs/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/login.css">
+<link rel="stylesheet" type="text/css" href="../libs/languages.min.css">
+
 </head>
 <body>
 <!-- header -->
@@ -28,38 +29,36 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">Bitcoin</a>
+      <a class="navbar-brand" href="../index.html">Bitcoin</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
       <ul class="nav navbar-nav">
-        <li><a href="ordinaryTransaction.html">普通交易<span class="sr-only">(current)</span></a></li>
+        <li><a href="../trade/ordinaryTrade.html">普通交易<span class="sr-only">(current)</span></a></li>
         <li><a href="#">币币交易</a></li>
         <li><a href="#">发布广告</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="login.html">登录</a></li>
-      <li><a href="register.html">注册</a></li>
+        <li><a href="../login.html">登录</a></li>
+      <li><a href="../register.html">注册</a></li>
 	  <li id="settingBtn"><a href="#"><span class="glyphicon glyphicon-cog" ></span></a></li>
         <li class="dropdown">
          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-          <button type="button" class="btn btn-default btn-sm" id="langBtn"><span class="lang-sm" lang="zh"></span></button><span class="caret"></span></a>
+          <button type="button" class="btn btn-default btn-sm" id="langBtn"><span class="lang-sm" lang="zh"></span></button><span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="#"><span class="lang-sm lang-lbl" lang="en"></span></a></li>
             <li><a href="#"><span class="lang-sm lang-lbl" lang="ja"></span></a></li>
             <li><a href="#"><span class="lang-sm lang-lbl" lang="ko"></span></a></li>
             <li><a href="#"><span class="lang-sm lang-lbl" lang="ru"></span></a></li>
             <li><a href="#"><span class="lang-sm lang-lbl" lang="vi"></span></a></li>
-          </ul>
+          </ul>
         </li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-<!-- header --> 
-
-
+<!-- header -->
 <!-- Modal -->
 <div class="modal fade" id="settingModal" role="dialog">
     <div class="modal-dialog">
@@ -95,7 +94,7 @@
           </div>
       </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">确定</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
         </div>
       </div>
       
@@ -110,79 +109,32 @@ $(document).ready(function(){
 });
 </script>
 
-<!-- AdBox --> 
-<div>
-  <div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-      <li data-target="#myCarousel" data-slide-to="1"></li>
-      <li data-target="#myCarousel" data-slide-to="2"></li>
-      <li data-target="#myCarousel" data-slide-to="3"></li>
-    </ol>
-
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner">
-      <div class="item active">
-        <img src="images/1.jpg" alt="Bitcon" style="width:100%;">
-      </div>
-
-      <div class="item">
-        <img src="images/2.jpg" alt="Bitcash" style="width:100%;">
-      </div>
-    
-      <div class="item">
-        <img src="images/3.jpg" alt="ETH" style="width:100%;">
-      </div>
-      <div class="item">
-        <img src="images/4.jpg" alt="注册" style="width:100%;">
-      </div>
+<!-- login box -->
+<div class="container" >
+<div class="row" id= "pwdSetBox">
+<h2>重置登录密码</h2>
+<div div class=" col-md-6" >
+  <form name="pwdResetForm" ng-submit="login()" role="form">
+    <div class="form-group">
+      <label for="account">账号:</label>
+      <input type="text" style="max-width: 400px;" maxlength="64" class="form-control" id="account" placeholder="" name="account" required>
+	  <span ng-show="pwdResetForm.account.$dirty && pwdResetForm.account.$error.required" class="help-block" style="color:red ;" ng-cloak>请输入密码</span>
     </div>
-
-  </div>
+    <button type="submit" ng-disabled="pwdResetForm.$invalid" class="btn btn-success">提交</button>
+  </form>
 </div>
-<!-- AdBox --> 
 
-
-<!-- Table --> 
-<div class="container" > 
-   <div class="table-responsive" ng-show="myApp.table">
-   <table class="table table-bordered" id="tableHead">
-       <thead>
-      <tr>
-       <th id="USDT" ng-click="myApp.changeTradingPair($event)" ng-mousemove="myApp.changeCursor($event)">USDT</th>
-       <th id="BTC" ng-click="myApp.changeTradingPair($event)" ng-mousemove="myApp.changeCursor($event)">BTC</th>
-       <th id="ETH" ng-click="myApp.changeTradingPair($event)" ng-mousemove="myApp.changeCursor($event)">ETH</th>
-       <th id="HT" ng-click="myApp.changeTradingPair($event)" ng-mousemove="myApp.changeCursor($event)">HT</th>
-       <th id="自选" ng-click="myApp.changeTradingPair($event)" ng-mousemove="myApp.changeCursor($event)">自选</th>
-     </tr>
-     </thead>
-   </table>
-   <table id="myTable" class="table table-bordered" >
-   <thead>
-      <tr>
-       <th>交易对</th>
-       <th>最新价</th>
-       <th>涨幅</th>
-       <th>最高价</th>
-       <th>最低价</th>
-       <th>24H量</th>
-     </tr>
-     </thead>
-     <tbody>
-     <tr ng-repeat="x in myApp.tradingPair[0]">
-       <td>{{ x }}</td>
-       <td></td>
-       <td></td>
-       <td></td>
-       <td></td>
-       <td></td>
-     </tr>
-     </tbody>
-   </table>
-  </div>
+<div class=" col-md-6">
+<div id="loginNote">
+<p><b>重置登录密码后24小时内禁止提币。</b></p>
 </div>
-<!-- Table --> 
+</div>
+
+</div>
+</div>
+<!-- login box -->
+
+
 <div class="footer">
 <div class="container">
 <footer id="page-footer">
@@ -192,8 +144,8 @@ $(document).ready(function(){
    <h4>服务</h4>
    <ul>
     <li><a href="#" title="行业报告">行业报告</a></li>
-<li><a href="#" title="币种介绍">币种介绍</a></li> 
-<li><a href="#" title="常见问题">常见问题</a></li> 
+<li><a href="#" title="币种介绍">币种介绍</a></li>
+<li><a href="#" title="常见问题">常见问题</a></li>
 <li><a href="#" title="使用教程">使用教程</a></li>
 <li><a href="#" title="公告">公告</a></li>
   </ul>
@@ -232,7 +184,7 @@ $(document).ready(function(){
   </div>
   <div class="footer-credit clearfix ">
      <h5>www.shangma.com 版权所有</h5>
-  </div>      
+  </div>     
     </div>
  </footer>
 </div>
@@ -246,8 +198,14 @@ $('ul.nav li.dropdown').hover(function() {
 </script>
  
 <!-- Libraries -->
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.min.js"></script>
-<script src="js/main.js"></script>
+<script src="../libs/angular.min.js"></script>
+<script src="../libs/angular-route.min.js"></script>
+<script src="../libs/angular-messages.min.js"></script>
+<script src="../js/modules/angular-cookies.js"></script>
+<script src="../js/dirPagination.js"> </script>
+<script src="../app.js"></script>
+<script src="../js/directives/passwordVerify.js"></script>
+<script src="../js/controllers/login.js"></script>
+
 </body>
 </html>

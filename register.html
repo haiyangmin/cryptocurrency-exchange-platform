@@ -1,0 +1,289 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN" ng-app="myApp" ng-controller="registerController as register">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>加密货币交易平台</title>
+<meta name="keywords" content="比特币交易平台,比特币,BTC,比特币价格,比特币行情,USDT,莱特币,BCH,以太坊,ETH,以太经典" />
+<meta name="description" content="比特币交易平台,莱特币(LTC),以太坊(ETH),比特币现金(BCH),以太经典(ETC)达世币(DASH)等虚拟货币以比特币(BTC)、USDT进行交易！提供实时比特币价格,比特币行情。" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="libs/jquery.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="libs/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/register.css">
+<link rel="stylesheet" type="text/css" href="libs/languages.min.css">
+
+</head>
+<body>
+<!-- header -->
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Bitcoin</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="trade/ordinaryTrade.html">普通交易<span class="sr-only">(current)</span></a></li>
+        <li><a href="#">币币交易</a></li>
+        <li><a href="#">发布广告</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="login.html">登录</a></li>
+        <li class="active"><a href="register.html">注册</a></li>
+	  <li id="settingBtn"><a href="#"><span class="glyphicon glyphicon-cog" ></span></a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+          <button type="button" class="btn btn-default btn-sm" id="langBtn"><span class="lang-sm" lang="zh"></span></button><span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#"><span class="lang-sm lang-lbl" lang="en"></span></a></li>
+            <li><a href="#"><span class="lang-sm lang-lbl" lang="ja"></span></a></li>
+            <li><a href="#"><span class="lang-sm lang-lbl" lang="ko"></span></a></li>
+            <li><a href="#"><span class="lang-sm lang-lbl" lang="ru"></span></a></li>
+            <li><a href="#"><span class="lang-sm lang-lbl" lang="vi"></span></a></li>
+          </ul>
+
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<!-- header -->
+
+<!-- Modal -->
+<div class="modal fade" id="settingModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">设置</h4>
+        </div>
+        <div class="modal-body">
+		  <div class="form-group">
+          <label for="currency">折算货币</label>
+          <select class="form-control" id="currency">
+          <option>美元</option>
+          <option>人民币</option>
+          <option>韩元</option>
+           <option>欧元</option>
+		   <option>英镑</option>
+		   <option>卢布</option>
+           </select>
+          </div>
+		  <div class="form-group">
+          <p>主题</p>
+          <form>
+          <label class="radio-inline">
+          <input type="radio" name="optradio">黑色
+          </label>
+          <label class="radio-inline">
+          <input type="radio" name="optradio">白色
+          </label>
+          </form>
+          </div>
+      </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+<script>
+$(document).ready(function(){
+    $("#settingBtn").click(function(){
+        $("#settingModal").modal();
+    });
+});
+</script>
+<!-- register box -->
+<div class="container"  >
+
+<div class="row" >
+
+ <div class="col-sm-6 col-md-6" >
+  <div id="register">
+    <h2>欢迎注册</h2>
+    <h4 id="phoneRegister" style="color:blue; cursor: pointer;" ng-click="register.phoneRegister()" >手机注册</h4>
+    <h4 id="emailRegister" ng-click="register.emailRegister()" style="cursor: pointer;">邮箱注册</h4>
+  </div>
+ </div>
+
+
+  <div class="col-sm-6 col-md-6" >
+  </div>
+
+ </div>
+
+
+<div class="row" >
+<div class="col-sm-6 col-md-6" >
+<div  id= "registerBox" >
+  <form  name="registerForm" class="form-signin" ng-submit="submit(registerForm)"  novalidate>
+ 
+    <div class="form-group">
+      <label for="countries">国籍</label>
+      <select ng-model="register.selectedCountry"  ng-change="register.changeCode()" style="max-width: 400px;" class="form-control" id="countries" ng-options="country.name for country in register.countries" ng-required="true">
+      </select>
+      </div>
+
+    <div class="form-group">
+     <p ng-cloak ><b>{{ register.selectedRegister}}</b></p>
+     <div class="form-inline">
+     <select ng-model="register.selected.dial_code" style="width: 100px; "  class="form-control" id="dialCode" ng-options="country.dial_code for country in register.countries" ng-show="register.displayCode" ng-required="true">
+      </select>
+      <input type="number" ng-model="register.phoneNumber"  ng-show="register.showPhone"  id="phoneNumber" name="phoneNumber" style="max-width: 400px; " ng-maxlength = "15" ng-minlength = "4"  class="form-control"  placeholder="输入手机号" ng-required="register.phoneRequired" >
+   
+ 
+      <input type="email" ng-model="register.email" ng-show="register.showEmail" id="email"  name="email" style="max-width: 400px; " ng-pattern="register.eml_add"  maxlength="100" class="form-control"  placeholder="输入邮箱" ng-required="register.emailRequired"  >
+       <span ng-show = "register.showWarning">
+<span ng-cloak style="color:red;" ng-if="registerForm.email.$error.required && registerForm.email.$dirty">必须输入邮箱</span>
+<span ng-cloak style="color:red;"  ng-show="registerForm.email.$error.pattern">无效邮箱</span>
+       </span>
+
+     
+    </div>
+    </div>
+   
+    <div class="form-group" ng-class="{ 'has-error' : registerForm.user_password.$dirty && registerForm.user_password.$invalid }">
+        <p class="help-text"><b>登录密码</b></p>
+        <input type="password" class="form-control" id="user_password" name="user_password" placeholder="输入密码" ng-minlength = "8" ng-maxlength = "40"  style="max-width: 400px;" ng-required="true" ng-model="user.user_password" password-verify="{{user.confirm_password}}" ng-change="register.analyze(user.user_password)">
+        <div  class="help-block" ng-messages="registerForm.user_password.$error" ng-if="registerForm.user_password.$dirty">
+          <div ng-style="register.passwordStrength"><p ng-cloak style="margin-left: 35px">{{ register.pwdStrength}}</p></div>
+          <p ng-message="required">请输入密码</p>
+          <p ng-message="minlength">密码太短</p>
+          <p ng-message="maxlength">密码太长</p>
+        </div>
+      </div>
+      <div class="form-group" ng-class="{ 'has-error' : registerForm.confirm_password.$dirty && registerForm.confirm_password.$invalid }">
+        <p class="help-text"><b>确认密码</b></p>
+        <input class="form-control" id="confirm_password" ng-model="user.confirm_password" name="confirm_password" type="password" placeholder="输入密码" ng-minlength = "8" ng-maxlength = "40" style="max-width: 400px;" ng-required="true" password-verify="{{user.user_password}}">
+        <div class="help-block" ng-messages="registerForm.confirm_password.$error" ng-if="registerForm.confirm_password.$dirty">
+          <p ng-message="required">请输入密码</p>
+          <p ng-message="minlength">密码太短</p>
+          <p ng-message="maxlength">密码太长</p>
+          <p ng-message="passwordVerify">密码不匹配</p>
+        </div>
+      </div>
+     
+     
+     <div class="form-group">
+      <label for="pwd">邀请码（选填）</label>
+      <input type="text" style="max-width: 400px;"  maxlength="20" class="form-control" id="InviteCode" placeholder="" name="InviteCode">
+      </div>
+    <div class="checkbox">
+      <label><input type="checkbox" name="agreement" ng-model="register.agreement"  ng-required="true" >我已阅读并同意《用户协议》</label>
+    </div>
+    <button type="submit" class="btn btn-success" name="submit" 
+    ng-disabled="registerForm.phoneNumber.$error.required || registerForm.$pristine || registerForm.email.$error.required || registerForm.user_password.$error.required || registerForm.confirm_password.$error.required || !register.agreement  ">注册</button>
+  </form>
+ </div>
+</div>
+
+<div class="col-sm-6 col-md-6" >
+<div id ="registerNote">
+<P>国籍信息注册后不可修改，请务必如实选择。</P>
+
+<P>验证邮件可能会被误判为垃圾邮件，请注意查收。</P>
+
+<P>请妥善保存您的Huobi账号及登录密码。</P>
+
+<P>请勿和其他网站使用相同的登录密码。</P>
+</div>
+</div>
+
+</div>
+</div>
+<!-- login box -->
+
+
+<div class="footer">
+<div class="container">
+<footer id="page-footer">
+    <div class="page-container">
+  <div class="footer-content clearfix">
+     <div class="footer-content-block desktop-only">
+   <h4>服务</h4>
+   <ul>
+    <li><a href="#" title="行业报告">行业报告</a></li>
+<li><a href="#" title="币种介绍">币种介绍</a></li>
+<li><a href="#" title="常见问题">常见问题</a></li>
+<li><a href="#" title="使用教程">使用教程</a></li>
+<li><a href="#" title="公告">公告</a></li>
+  </ul>
+     </div>
+     
+      <div class="footer-content-block desktop-only">
+   <h4>工具</h4>
+   <ul>
+    <li><a href="#" title="客户端下载">客户端下载</a></li>
+<li><a href="#" title="帮助中心">帮助中心</a></li>
+<li><a href="#" title="API文档">API文档</a></li>
+<li><a href="#" title="数字资产介绍">数字资产介绍</a></li>
+<li><a href="#" title="新手引导">新手引导</a></li>
+   </ul>
+     </div>
+     
+     <div class="footer-content-block desktop-only">
+   <h4>关于</h4>
+   <ul>
+    <li><a href="#" title="关于火币">关于火币</a></li>
+<li><a href="#" title="联系我们">联系我们</a></li>
+<li><a href="#" title="加入我们">加入我们</a></li>
+<li><a href="#" title="上币申请">上币申请</a></li>
+   </ul>
+     </div>
+           
+           
+     <div class="footer-content-block">
+   <h4>条款说明</h4>
+    <ul>
+<li><a href="#" title="用户协议">用户协议</a></li>
+<li><a href="#" title="隐私条款">隐私条款</a></li>
+<li><a href="#" title="法律声明">法律声明</a></li>
+   </ul>
+     </div>
+  </div>
+  <div class="footer-credit clearfix ">
+     <h5>www.shangma.com 版权所有</h5>
+  </div>     
+    </div>
+ </footer>
+</div>
+</div>
+<script>
+$('ul.nav li.dropdown').hover(function() {
+  $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(200);
+}, function() {
+  $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(200);
+});
+</script>
+ 
+<!-- Libraries -->
+<script src="libs/angular.min.js"></script>
+<script src="libs/angular-route.min.js"></script>
+<script src="libs/angular-messages.min.js"></script>
+<script src="js/modules/angular-cookies.js"></script>
+<script src="js/dirPagination.js"> </script>
+<script src="app.js"></script>
+<script src="js/services/countries.js"></script>
+<script src="js/controllers/register.js"></script>
+<script src="js/directives/passwordVerify.js"></script>
+</body>
+</html>
+
+

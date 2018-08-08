@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="zh-CN" ng-app="myApp" ng-controller="registerController as register">
+<html lang="zh-CN" ng-app="myApp" ng-controller="loginController as login">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>加密货币交易平台</title>
@@ -10,11 +10,11 @@
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="libs/jquery.min.js"></script>
 <!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="css/register.css">
-<link rel="stylesheet" type="text/css" href="css/languages.min.css">
+<script src="libs/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/login.css">
+<link rel="stylesheet" type="text/css" href="libs/languages.min.css">
 
 </head>
 <body>
@@ -33,18 +33,18 @@
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
       <ul class="nav navbar-nav">
-        <li><a href="ordinaryTransaction.html">普通交易<span class="sr-only">(current)</span></a></li>
+        <li ><a href="trade/ordinaryTrade.html">普通交易<span class="sr-only">(current)</span></a></li>
         <li><a href="#">币币交易</a></li>
         <li><a href="#">发布广告</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="login.html">登录</a></li>
-        <li class="active"><a href="register.html">注册</a></li>
+        <li class="active"><a href="login.html">登录</a></li>
+      <li><a href="register.html">注册</a></li>
 	  <li id="settingBtn"><a href="#"><span class="glyphicon glyphicon-cog" ></span></a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
           <button type="button" class="btn btn-default btn-sm" id="langBtn"><span class="lang-sm" lang="zh"></span></button><span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="#"><span class="lang-sm lang-lbl" lang="en"></span></a></li>
@@ -59,7 +59,6 @@
   </div><!-- /.container-fluid -->
 </nav>
 <!-- header -->
-
 <!-- Modal -->
 <div class="modal fade" id="settingModal" role="dialog">
     <div class="modal-dialog">
@@ -95,7 +94,7 @@
           </div>
       </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">确定</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
         </div>
       </div>
       
@@ -109,98 +108,36 @@ $(document).ready(function(){
     });
 });
 </script>
-<!-- register box -->
-<div class="container"  >
-
-<div class="row" >
-
- <div class="col-sm-6 col-md-6" >
-  <div id="register">
-    <h2>欢迎注册</h2>
-    <h4 id="phoneRegister" style="color:blue" ng-click="register.phoneRegister()" ng-mousemove="register.changeCursor($event)">手机注册</h4>
-    <h4 id="emailRegister" ng-click="register.emailRegister()" ng-mousemove="register.changeCursor($event)">邮箱注册</h4>
-  </div>
- </div>
 
 
-  <div class="col-sm-6 col-md-6" >
-  </div>
-
- </div>
-
-
-<div class="row" >
-<div class="col-sm-6 col-md-6" >
-<div  id= "registerBox" >
-  <form action="/action_page.php"  name="registerForm" novalidate>
- 
+<!-- login box -->
+<div class="container" >
+<div class="row" id= "loginBox">
+<h2>欢迎登录</h2>
+<div div class=" col-md-6" >
+  <form name="loginForm" ng-submit="login()" role="form">
     <div class="form-group">
-      <label for="countries">国籍</label>
-      <select ng-model="register.selectedCountry"  ng-change="register.changeCode()" style="max-width: 400px;" class="form-control" id="countries" ng-options="country.name for country in register.countries" ng-required="true">
-      </select>
-      </div>
-
+      <label for="email">账号:</label>
+      <input type="text"  style="max-width: 400px;"  maxlength="64" class="form-control" id="email" placeholder=" 输入邮箱或者手机号" ng-model="login.userId" name="email" required />
+      <span ng-show="loginForm.email.$dirty && loginForm.email.$error.required" class="help-block" style="color:red ;" ng-cloak>请输入输入邮箱或者手机号</span>
+    </div>
     <div class="form-group">
-     <p ng-cloak ><b>{{ register.selectedRegister}}</b></p>
-     <div class="form-inline">
-     <select ng-model="register.selected.dial_code" style="width: 100px; "  class="form-control" id="dialCode" ng-options="country.dial_code for country in register.countries" ng-show="register.displayCode" ng-required="true">
-      </select>
-      <input type="number" ng-model="register.phoneNumber"  ng-show="register.showPhone"  id="phoneNumber" name="phoneNumber" style="max-width: 400px; " ng-maxlength = "15" ng-minlength = "4"  class="form-control"  placeholder="输入手机号" ng-required="register.phoneRequired" >
-   
- 
-      <input type="email" ng-model="register.email" ng-show="register.showEmail" id="email"  name="email" style="max-width: 400px; " ng-pattern="register.eml_add"  maxlength="100" class="form-control"  placeholder="输入邮箱" ng-required="register.emailRequired"  >
-       <span ng-show = "register.showWarning">
-<span ng-cloak style="color:red;" ng-if="registerForm.email.$error.required && registerForm.email.$dirty">必须输入邮箱</span>
-<span ng-cloak style="color:red;"  ng-show="registerForm.email.$error.pattern">无效邮箱</span>
-       </span>
-
-     
+      <label for="pwd">密码:</label>
+      <input type="password" style="max-width: 400px;" maxlength="20" class="form-control" id="pwd" placeholder="输入密码" name="pwd"  ng-model="loginPwd" required />
+     <span ng-show="loginForm.pwd.$dirty && loginForm.pwd.$error.required" class="help-block" style="color:red ;" ng-cloak>请输入密码</span>
     </div>
-    </div>
-   
-    <div class="form-group" ng-class="{ 'has-error' : registerForm.user_password.$dirty && registerForm.user_password.$invalid }">
-        <p class="help-text"><b>登录密码</b></p>
-        <input type="password" class="form-control" id="user_password" name="user_password" placeholder="输入密码" ng-minlength = "8" ng-maxlength = "40"  style="max-width: 400px;" ng-required="true" ng-model="user.user_password" password-verify="{{user.confirm_password}}" ng-change="register.analyze(user.user_password)">
-        <div  class="help-block" ng-messages="registerForm.user_password.$error" ng-if="registerForm.user_password.$dirty">
-          <div ng-style="register.passwordStrength"><p ng-cloak style="margin-left: 35px">{{ register.pwdStrength}}</p></div>
-          <p ng-message="required">请输入密码</p>
-          <p ng-message="minlength">密码太短</p>
-          <p ng-message="maxlength">密码太长</p>
-        </div>
-      </div>
-      <div class="form-group" ng-class="{ 'has-error' : registerForm.confirm_password.$dirty && registerForm.confirm_password.$invalid }">
-        <p class="help-text"><b>确认密码</b></p>
-        <input class="form-control" id="confirm_password" ng-model="user.confirm_password" name="confirm_password" type="password" placeholder="输入密码" ng-minlength = "8" ng-maxlength = "40" style="max-width: 400px;" ng-required="true" password-verify="{{user.user_password}}">
-        <div class="help-block" ng-messages="registerForm.confirm_password.$error" ng-if="registerForm.confirm_password.$dirty">
-          <p ng-message="required">请输入密码</p>
-          <p ng-message="minlength">密码太短</p>
-          <p ng-message="maxlength">密码太长</p>
-          <p ng-message="passwordVerify">密码不匹配</p>
-        </div>
-      </div>
-     
-     
-     <div class="form-group">
-      <label for="pwd">邀请码（选填）</label>
-      <input type="text" style="max-width: 400px;"  maxlength="20" class="form-control" id="InviteCode" placeholder="" name="InviteCode">
-      </div>
     <div class="checkbox">
-      <label><input type="checkbox" name="agreement" ng-required="true" >我已阅读并同意《用户协议》</label>
+      <label><input type="checkbox" name="remember">记住密码</label>
     </div>
-    <button type="submit" class="btn btn-success" name="submit">注册</button>
+    <button type="submit" ng-disabled="loginForm.$invalid || dataLoading" class="btn btn-success">登录</button><span id="forgetPwd"><a href="user_center/reset_pwd.html">忘记密码?</a></span>
   </form>
- </div>
 </div>
 
-<div class="col-sm-6 col-md-6" >
-<div id ="registerNote">
-<P>国籍信息注册后不可修改，请务必如实选择。</P>
-
-<P>验证邮件可能会被误判为垃圾邮件，请注意查收。</P>
-
-<P>请妥善保存您的Huobi账号及登录密码。</P>
-
-<P>请勿和其他网站使用相同的登录密码。</P>
+<div class=" col-md-6">
+<div id="loginNote">
+<p><b>还不是Huobi的用户？</b></p>
+<p>立即注册，在全球领先的数字资产交易平台开始交易。</p>
+<a href="register.html">免费注册</a>
 </div>
 </div>
 
@@ -272,11 +209,16 @@ $('ul.nav li.dropdown').hover(function() {
 </script>
  
 <!-- Libraries -->
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-messages/1.5.7/angular-messages.min.js"></script>
-<script src="js/register.js"></script>
+<script src="libs/angular.min.js"></script>
+<script src="libs/angular-route.min.js"></script>
+<script src="libs/angular-messages.min.js"></script>
+<script src="js/modules/angular-cookies.js"></script>
+<script src="js/dirPagination.js"> </script>
+<script src="app.js"></script>
+<script src="js/services/AuthenticationService.js"></script>
+<script src="js/services/flash.service.js"></script>
+<script src="js/services/user.service.local-storage.js"></script>
+<script src="js/controllers/login.js"></script>
+
 </body>
 </html>
-
-

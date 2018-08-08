@@ -10,233 +10,13 @@
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="../libs/jquery.min.js"></script>
 <!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-<link rel="stylesheet" type="text/css" href="css/languages.min.css">
+<script src="../libs/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/pwd_reset.css">
+<link rel="stylesheet" type="text/css" href="../libs/languages.min.css">
 
-<style>
-.navbar {
-    margin-bottom: 0px;
-    background-color: #0e6bc9;
-    z-index: 9999;
-    border: 0;
-    font-size: 14px !important;
-    line-height: 1.42857143 !important;
-    letter-spacing: 2px;
-    border-radius: 0;
-    min-height: 60px;
-}
 
-.navbar-brand {
-  padding: 0 15px;
-  height: 60px;
-  line-height: 60px;
-}
-
-.navbar-toggle {
-  /* (80px - button height 34px) / 2 = 23px */
-  margin-top: 13px;
-  padding: 9px 10px !important;
-  border-color: transparent;
-  color: #fff !important;
-}
-@media (min-width: 768px) {
-  .navbar-nav > li > a {
-    /* (80px - line-height of 27px) / 2 = 16.5px */
-    padding-top: 16.5px;
-    padding-bottom: 16.5px;
-    line-height: 27px;
-  }
-}
-
-/* navbar */
-.navbar-default {
-    background-color: #0e6bc9;
-    border-color: #E7E7E7;
-}
-
-/* Title */
-.navbar-default .navbar-brand {
-    color: white;
-}
-.navbar-default .navbar-brand:hover,
-.navbar-default .navbar-brand:focus {
-    color: black;
-}
-/* Link */
-.navbar-default .navbar-nav > li > a {
-    color: white;
-}
-.navbar-default .navbar-nav > li > a:hover,
-.navbar-default .navbar-nav > li > a:focus {
-    color: black;
-    background-color: #0b8ee5;
-}
-.navbar-default .navbar-nav > .active > a,
-.navbar-default .navbar-nav > .active > a:hover,
-.navbar-default .navbar-nav > .active > a:focus {
-    color: black;
-    background-color: #0b8ee5;
-}
-.navbar-default .navbar-nav > .open > a,
-.navbar-default .navbar-nav > .open > a:hover,
-.navbar-default .navbar-nav > .open > a:focus {
-    color: black;
-    background-color: #0b8ee5;
-}
-/* Caret */
-.navbar-default .navbar-nav > .dropdown > a .caret {
-    border-top-color: white;
-    border-bottom-color: white;
-}
-.navbar-default .navbar-nav > .dropdown > a:hover .caret,
-.navbar-default .navbar-nav > .dropdown > a:focus .caret {
-    border-top-color: black;
-    border-bottom-color: black;
-}
-.navbar-default .navbar-nav > .open > a .caret,
-.navbar-default .navbar-nav > .open > a:hover .caret,
-.navbar-default .navbar-nav > .open > a:focus .caret {
-    border-top-color: #555;
-    border-bottom-color: #555;
-}
-/* Mobile version */
-.navbar-default .navbar-toggle {
-    border-color: #DDD;
-}
-.navbar-default .navbar-toggle:hover,
-.navbar-default .navbar-toggle:focus {
-    background-color: #0b8ee5;
-}
-.navbar-default .navbar-toggle .icon-bar {
-    background-color: #CCC;
-}
-@media (max-width: 767px) {
-    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
-        color: white;
-    }
-    .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
-    .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
-          color: black;
-    }
-}
-
-#langBtn {
-  background-color: #0e6bc9;
-  color: white;
-  border-style: none;
-}
-
-.navbar-default .navbar-nav > .dropdown:hover #langBtn {
-  background-color:  #0b8ee5;
-  border-style: none;
-}
-
-
-#settingModal {
-	 margin-top: 80px;
-}
-.table-responsive {
- background-color: #fff !important;
-}
-tr:nth-child(even) {
-    background-color: #f7f8f9 !important;
-}
-
-.container {
-   margin: auto !important;
-    width: 80% !important;
-    }
-
-#pwd_Reset_Box {
-  margin-top: 120px !important;
-  margin-bottom: 200px !important;
-    }
-#pwd_Reset_Note {  
-     margin-top: 30px !important;
-     margin-left:40px !important;
-}
-    
-
-.footer {
-background-color: #f5f5f5;
- color: #999 ;}
-#page-footer a {
-color: inherit}
-#page-footer a:hover {
-color: #666;
-text-decoration: underline}
-.footer-content {
-padding: 45px 0;
-margin-left: -15px;
-margin-right: -15px;}
-.footer-content .footer-content-block {
-width: 25%;
-float: left;
-padding-left: 15px;
-padding-right: 15px;}
-.footer-content .footer-content-block > h4 {
-margin: 0;
-color: #66bb6a;
-font-size: 1em;
-font-weight: 700;
-padding-bottom: 12px;
-letter-spacing: -0.02em;}
-.footer-content p {
-padding-top: 5px;
- line-height: 30px;
-margin: 0}
-.footer-content .footer-content-block > ul {
-margin: 0;
-padding: 0;
- list-style: none}
-.footer-content .footer-content-block > ul > li {
-padding-top: 10px}
-.footer-content + .footer-credit {
-border-top: 1px solid #ccc}
-.footer-credit {
-font-size: 12px;
-padding: 25px 0;}
-.footer-credit h5 {
-font-size: inherit;
-color: inherit;
-float: left;
-font-weight: 400;
-margin: 0;}
-.footer-credit-links {
-float: right}
-.footer-credit-links p {
-float: left;
- margin: 0}
-.footer-credit-links ul {
-float: left;
-list-style: none;
-padding: 0;
-margin: 0 0 0 3px}
-.footer-credit-links ul > li {
-float: left}
-.footer-credit-links ul > li + li:before {
-content: ' ';
-display: inline-block;
- vertical-align: baseline;
- margin: 0 3px}
- 
-@media (max-width: 766px) {
-.desktop-only {
-display: none !important;}
-#pwd_Reset_Box {
-  margin-top: 50px !important;
-  margin-bottom: 50px !important;
-    }
-#pwd_Reset_Note {  
-     margin-top: 30px !important;
-     margin-left:0px !important;
-}
-       
-}
-</style>
 </head>
 <body>
 <!-- header -->
@@ -251,19 +31,19 @@ display: none !important;}
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">Bitcoin</a>
+      <a class="navbar-brand" href="../index.html">Bitcoin</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="ordinaryTransaction.html">普通交易<span class="sr-only">(current)</span></a></li>
+        <li><a href="../trade/ordinaryTrade.html">普通交易<span class="sr-only">(current)</span></a></li>
         <li><a href="#">币币交易</a></li>
         <li><a href="#">发布广告</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="login.html">登录</a></li>
-        <li><a href="register.html">注册</a></li>
+        <li><a href="../login.html">登录</a></li>
+        <li><a href="../register.html">注册</a></li>
 	  <li id="settingBtn"><a href="#"><span class="glyphicon glyphicon-cog" ></span></a></li>
         <li class="dropdown">
          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -320,7 +100,7 @@ display: none !important;}
           </div>
       </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">确定</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
         </div>
       </div>
      
@@ -423,7 +203,7 @@ display: none !important;}
      </div>
   </div>
   <div class="footer-credit clearfix ">
-     <h5>www.chaojichaxun.com 版权所有</h5>
+     <h5>www.shangma.com 版权所有</h5>
   </div>     
     </div>
  </footer>
@@ -438,85 +218,13 @@ $('ul.nav li.dropdown').hover(function() {
 </script>
  
 <!-- Libraries -->
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-messages/1.5.7/angular-messages.min.js"></script>
-<script>
-angular.module('myApp', ['ngMessages'])
-.controller('pwd_resetController',['$scope',pwd_resetController])
-.directive('passwordVerify', passwordVerify);
-
-function pwd_resetController($http) {
-  var vm = this;
-
-  vm.strongRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
-  vm.mediumRegex = /^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})/;
-  vm.pwdStrength = "";
-  vm.passwordStrength = {
-                    "width": "80px",
-                    "color": "black"
-                };
-
-vm.analyze = function (value) {
-                    if(vm.strongRegex.test(value)) {
-                        vm.passwordStrength["background-color"] = "green";
-                        vm.pwdStrength = "强";
-                    } else if(vm.mediumRegex.test(value)) {
-                        vm.passwordStrength["background-color"] = "orange";
-                        vm.pwdStrength = "中";
-                    } else {
-                        vm.passwordStrength["background-color"] = "red";
-                        vm.pwdStrength = "弱";
-                       
-                    }
-                }
-
- 
-vm.load = function (){
-  $http({
-        url: "https://www.w3schools.com/angular/customers.php",
-        method: "GET",
- 
-    })
-    .then(function mySuccess(response) {
-       vm.myData = response.data.records;
-    },
-    function myError(response) {
-        alert(response.statusText);
-    });
-   }
-    
-}
-
-function passwordVerify() {
-    return {
-      restrict: 'A', // only activate on element attribute
-      require: '?ngModel', // get a hold of NgModelController
-      link: function(scope, elem, attrs, ngModel) {
-        if (!ngModel) return; // do nothing if no ng-model
-
-        // watch own value and re-validate on change
-        scope.$watch(attrs.ngModel, function() {
-          validate();
-        });
-
-        // observe the other value and re-validate on change
-        attrs.$observe('passwordVerify', function(val) {
-          validate();
-        });
-
-        var validate = function() {
-          // values
-          var val1 = ngModel.$viewValue;
-          var val2 = attrs.passwordVerify;
-
-          // set validity
-          ngModel.$setValidity('passwordVerify', val1 === val2);
-        };
-      }
-    }
-  }
-
-</script>
+<script src="../libs/angular.min.js"></script>
+<script src="../libs/angular-route.min.js"></script>
+<script src="../libs/angular-messages.min.js"></script>
+<script src="../js/modules/angular-cookies.js"></script>
+<script src="../js/dirPagination.js"> </script>
+<script src="../app.js"></script>
+<script src="../js/directives/passwordVerify.js"></script>
+<script src="../js/controllers/pwd_reset.js"></script>
 </body>
 </html>

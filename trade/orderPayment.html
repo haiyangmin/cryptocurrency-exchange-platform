@@ -1,0 +1,387 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN" ng-app="myApp" ng-controller="paymentController as payment" ng-init="payment.countTime()">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>加密货币交易平台</title>
+<meta name="keywords" content="比特币交易平台,比特币,BTC,比特币价格,比特币行情,USDT,莱特币,BCH,以太坊,ETH,以太经典" />
+<meta name="description" content="比特币交易平台,莱特币(LTC),以太坊(ETH),比特币现金(BCH),以太经典(ETC)达世币(DASH)等虚拟货币以比特币(BTC)、USDT进行交易！提供实时比特币价格,比特币行情。" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="../libs/jquery.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="../libs/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/orderPayment.css">
+<link rel="stylesheet" type="text/css" href="../libs/languages.min.css">
+</head>
+<body>
+<!-- header -->
+<!-- header -->
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="../index.html">Bitcoin</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="./ordinaryTrade.html">普通交易<span class="sr-only">(current)</span></a></li>
+        <li><a href="#">币币交易</a></li>
+        <li><a href="#">发布广告</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="../login.html">登录</a></li>
+        <li><a href="../register.html">注册</a></li>
+	  <li id="settingBtn"><a href="#"><span class="glyphicon glyphicon-cog" ></span></a></li>
+        <li class="dropdown">
+         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+          <button type="button" class="btn btn-default btn-sm" id="langBtn"><span class="lang-sm" lang="zh"></span></button><span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#"><span class="lang-sm lang-lbl" lang="en"></span></a></li>
+            <li><a href="#"><span class="lang-sm lang-lbl" lang="ja"></span></a></li>
+            <li><a href="#"><span class="lang-sm lang-lbl" lang="ko"></span></a></li>
+            <li><a href="#"><span class="lang-sm lang-lbl" lang="ru"></span></a></li>
+            <li><a href="#"><span class="lang-sm lang-lbl" lang="vi"></span></a></li>
+          </ul>
+
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<!-- header -->
+
+<!-- Modal -->
+<div class="modal fade" id="settingModal" role="dialog">
+    <div class="modal-dialog">
+   
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">设置</h4>
+        </div>
+        <div class="modal-body">
+		  <div class="form-group">
+          <label for="currency">折算货币</label>
+          <select class="form-control" id="currency">
+          <option>美元</option>
+          <option>人民币</option>
+          <option>韩元</option>
+           <option>欧元</option>
+		   <option>英镑</option>
+		   <option>卢布</option>
+           </select>
+          </div>
+		  <div class="form-group">
+          <p>主题</p>
+          <form>
+          <label class="radio-inline">
+          <input type="radio" name="optradio">黑色
+          </label>
+          <label class="radio-inline">
+          <input type="radio" name="optradio">白色
+          </label>
+          </form>
+          </div>
+      </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+        </div>
+      </div>
+     
+    </div>
+  </div>
+<script>
+$(document).ready(function(){
+    $("#settingBtn").click(function(){
+        $("#settingModal").modal();
+    });
+});
+</script>
+
+<!-- header -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="paymentConfirmModal" role="dialog">
+    <div class="modal-dialog">
+   
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">确认付款 <span style="margin-left: 10px;" class="glyphicon glyphicon-time"></span> <span style="color:red">{{ payment.displayMinutes}}:{{ payment.displaySeconds}}</span></h4>
+        </div>
+        <div class="modal-body">
+		  <div class="form-group">
+          <p>支付金额:</p>
+          <p style="color:green"><b>{{ payment.amount}} CNY</b></p>
+          <p>对方银行卡:</p>
+          <p ng-cloak><b>{{ payment.paymentInfo.bankAccount}}</b></p>
+          <p><b><span ng-cloak>{{ payment.selectedPaymentInfo.name}}</span><span ng-cloak style="margin-left: 10px;">{{ payment.selectedPaymentInfo.bankName}}</span><span ng-cloak style="margin-left: 10px;">{{ payment.selectedPaymentInfo.note}}</span></b></p>
+          <p>付款参考号:</p>
+          <p><b>{{ payment.referenceNo}}</b></p>
+          </div>
+       </div>
+        <div class="modal-footer">
+           <button type="button" class="btn btn-link" data-dismiss="modal">还未付款</button>
+          <button type="button"  class="btn btn-primary" ng-click="cancel()" class="btn">已付款</button>
+        </div>
+      </div>
+     
+    </div>
+
+</div>
+<script>
+$(document).ready(function(){
+    $("#paymentBtn").click(function(){
+        $("#paymentConfirmModal").modal();
+    });
+});
+</script>
+
+
+<!--  box -->
+<div class="container" >
+<div class="row" style="margin-top: 40px; ">
+<div  class="col-sm-8 col-md-8 col-lg-8" >
+
+<div style="background-color:#f7f9fc; margin: 5px; padding:10px ; ">
+<p>订单:<span ng-cloak>{{ payment.orderId}}</span></p>
+<h3>您向<span ng-cloak style="color: red;margin: 0px 10px;">{{ payment.seller}}</span>购买<span ng-cloak style="color: red;margin: 0px 10px;">{{ payment.exchangedAmount}}</span></h3>
+
+<h4>单价：<span ng-cloak style="margin: 0px 10px;">{{ payment.unitPrice}} CNY/BTC</span></h4>
+<h4>总价：<span ng-cloak style="margin: 0px 10px;">{{ payment.amount}} CNY</span></h4>
+
+<!--  ordercanceled -->
+<div id="orderCanceled" style="margin-top: 40px;" ng-show="payment.OrderCancelDisplay">
+  <p>卖方收款方式:</p>
+<p ng-cloak style="background-color:gray; margin: 25px 0px; color:#f4f6f9">订单已取消，无法查看支付信息</p>
+</div>
+<!--  ordercanceled-->
+
+<div id="paymentInfo" style="margin-top: 40px;" ng-show="payment.paymentInfoDisplay">
+  <p>卖方收款方式:</p>
+
+  <form>
+    <div class="radio">
+      <label ><input ng-cloak type="radio"  ng-model="payment.selectedMethod" ng-value="payment.paymentInfo" name="optradio" > {{ payment.paymentInfo.payMethod}} <span ng-cloak style="margin-left: 20px;">{{ payment.paymentInfo.name}}</span><span ng-cloak style="margin-left: 10px;">{{ payment.paymentInfo.bankAccount}}</span><span ng-cloak style="margin-left: 10px;">{{ payment.paymentInfo.note}}</span><span ng-cloak style="margin-left: 10px;">{{ payment.paymentInfo.bankName}}</span> </label>
+    </div>
+    <div class="radio">
+      <label><input ng-cloak type="radio" ng-model="payment.selectedMethod" ng-value="payment.paymentInfo1" name="optradio">{{ payment.paymentInfo1.payMethod}} <span ng-cloak style="margin-left: 20px;">{{ payment.paymentInfo1.name}}</span><span ng-cloak style="margin-left: 10px;">{{ payment.paymentInfo1.bankAccount}}</span><span ng-cloak style="margin-left: 10px;">{{ payment.paymentInfo1.note}}</span><span ng-cloak style="margin-left: 10px;">{{ payment.paymentInfo1.bankName}}</span> </label>
+    </div>
+  </form>
+
+</div>
+
+<!--  ordercanceled -->
+<div id="orderCanceled1" style="margin-top: 40px;" ng-show="payment.OrderCancelDisplay">
+<h3>订单已取消，付款参考号：{{ payment.referenceNo}}</h3>
+<span ng-cloak class="glyphicon glyphicon-remove-circle" style="font-size: 75px;margin: 25px 0px;"></span>
+</div>
+<!--  ordercanceled -->
+
+ <div ng-show="payment.paymentInfoDisplay">
+<p style="margin: 40px 0px; font-size: 16px;"><b>待支付，请于<span style="color: red; margin: 0px 5px;">{{ payment.displayMinutes}}分{{ payment.displaySeconds}}秒</span>内向<span ng-cloak style="color: red; margin: 0px 10px;">{{ payment.seller}}</span>支付<span ng-cloak style="margin: 0px 10px;">{{ payment.amount}} CNY</span>，付款参考号<span ng-cloak style="margin: 0px 10px;">{{ payment.referenceNo}}</span></b></p>
+  <form class="form-inline" action="/action_page.php">
+    <button type="button" id="paymentBtn" class="btn btn-primary btn-lg" ng-click="payment.pay()">去支付</button>
+     <label for="email" style="color:green;margin-left: 40px;" ng-cloak>对方已缴纳{{ payment.securityDeposit}}保证金</label>
+  </form>
+ <div style="margin: 30px 0px;"><button type="button" class="btn btn-link" ng-click="payment.orderCancel()">取消订单</button></div>
+ </div>
+ 
+</div>
+
+
+</div>
+
+<div class="col-sm-4 col-md-4 col-lg-4" >
+<div style="background-color:#f7f9fc; margin: 5px;  ">
+	<div id="live-chat">
+		<header class="clearfix">
+			<span class="glyphicon glyphicon-earphone chat-close"></span>
+			<h4>{{ payment.seller}}</h4>
+         <span class="chat-message-counter">3</span>
+		</header>
+		<div class="chat">
+         <div class="chat-history">
+			<div class="chat-message clearfix">
+				<img src="http://lorempixum.com/32/32/people" alt="" width="32" height="32">
+					<div class="chat-message-content clearfix">		
+						<span class="chat-time">13:35</span>
+						<h5>{{ payment.seller}}</h5>
+						<p>请直接扫二维码或转账付款，收款立即放币！新手朋友请阅付款须知： 1、请通过认证的实名账户付款！ 2、除付款参考号外，请不要再备注任何信息！ 3、可先加好友后再转账，如有疑问可加微信（yxtan138)，免费提供答疑解惑服务； 4、请先确认完成付款，再标记已付，否则申诉处理！ 5、放行后币是存放在您法币交易资产里，如需币币交易请操作划转后才能在APP中看到！</p>
+					</div> <!-- end chat-message-content -->
+
+				</div> <!-- end chat-message -->
+
+				<hr>
+
+				<div class="chat-message clearfix">	
+					<img src="http://gravatar.com/avatar/2c0ad52fc5943b78d6abe069cc08f320?s=32" alt="" width="32" height="32">
+				<div class="chat-message-content clearfix">
+					<span class="chat-time">13:37</span>
+						<h5>{{ payment.buyer}}</h5>
+						<p>您的订单115319178894771因为超时已被系统取消。如有疑问，请联系客服。16:05:00</p>
+					</div> <!-- end chat-message-content -->
+				</div> <!-- end chat-message -->
+				<hr>
+               
+				<div class="chat-message clearfix">	
+					<img src="http://lorempixum.com/32/32/people" alt="" width="32" height="32">
+					<div class="chat-message-content clearfix">	
+						<span class="chat-time">13:38</span>
+						<h5>{{ payment.seller}}</h5>
+						<p>给卖家付款安全吗？</p>
+
+					</div> <!-- end chat-message-content -->
+				</div> <!-- end chat-message -->
+				<hr>
+
+			</div> <!-- end chat-history -->
+			<p class="chat-feedback">对方正在输入…</p>
+			<form action="#" method="post">
+
+				<fieldset>	
+					<input type="text" placeholder="输入信息，回车发送" autofocus>
+					<input type="hidden">
+				</fieldset>
+			</form>
+
+		</div> <!-- end chat -->
+	</div> <!-- end live-chat -->
+
+ 
+  </div>
+</div>
+
+</div>
+
+<div class="row" style="margin-top: 40px; margin-bottom: 60px;">
+
+<div  class="col-sm-8 col-md-8 col-lg-8"  >
+<p><b>常见问题</b></p>
+<p id="question" style="cursor: pointer; color:blue;"><span class="glyphicon glyphicon-menu-right"></span>给卖家付款安全吗？</p>
+<p id="answer" style="display: none;">当你进入交易时，卖家的数字资产会被锁定在平台的钱包中，因此不必担心给卖家付款。如果卖家在您付款5分钟后还未放行数字资产，点击‘申诉’按钮，我们的客服团队将会帮助您。</p>
+<p id="question1" style="cursor: pointer; color:blue;"><span class="glyphicon glyphicon-menu-right"></span>我什么时候能收到币</p>
+<p id="answer1"  style="display: none;">若您已完成付款，请务必点击‘已付款’按钮，卖家确认收款后，您就会收到数字资产。</p>
+<p id="question2" style="cursor: pointer; color:blue;"><span class="glyphicon glyphicon-menu-down"></span>转款注意事项</p>
+ <div id="answer2" >
+<p>1、在转账过程中<span style=" color: red;">请勿备注类似BTC、USDT、火币等信息</span>，防止造成您的汇款被拦截、银行卡被冻结等问题，因此到账延迟，卖方可选择拒绝成交。</p>
+<p>2、请勿使用非平台实名的银行卡进行转款，否则卖家可拒绝成交并投诉。</p>
+<p>3、若交易金额大于50,000 CNY，法定假日或工作日17:00点以后汇款到银行卡可能造成到账不及时，请分批支付保证及时到账，若未及时到账，卖家有权拒绝成交。</p>
+ </div>
+
+</div>
+
+<div  class="col-sm-4 col-md-4 col-lg-4"  >
+</div>
+
+</div>
+
+</div>
+<!-- box -->
+
+
+<div class="footer">
+<div class="container">
+<footer id="page-footer">
+    <div class="page-container">
+  <div class="footer-content clearfix">
+     <div class="footer-content-block desktop-only">
+   <h4>服务</h4>
+   <ul>
+    <li><a href="#" title="行业报告">行业报告</a></li>
+<li><a href="#" title="币种介绍">币种介绍</a></li>
+<li><a href="#" title="常见问题">常见问题</a></li>
+<li><a href="#" title="使用教程">使用教程</a></li>
+<li><a href="#" title="公告">公告</a></li>
+  </ul>
+     </div>
+     
+      <div class="footer-content-block desktop-only">
+   <h4>工具</h4>
+   <ul>
+    <li><a href="#" title="客户端下载">客户端下载</a></li>
+<li><a href="#" title="帮助中心">帮助中心</a></li>
+<li><a href="#" title="API文档">API文档</a></li>
+<li><a href="#" title="数字资产介绍">数字资产介绍</a></li>
+<li><a href="#" title="新手引导">新手引导</a></li>
+   </ul>
+     </div>
+     
+     <div class="footer-content-block desktop-only">
+   <h4>关于</h4>
+   <ul>
+    <li><a href="#" title="关于火币">关于火币</a></li>
+<li><a href="#" title="联系我们">联系我们</a></li>
+<li><a href="#" title="加入我们">加入我们</a></li>
+<li><a href="#" title="上币申请">上币申请</a></li>
+   </ul>
+     </div>
+           
+           
+     <div class="footer-content-block">
+   <h4>条款说明</h4>
+    <ul>
+<li><a href="#" title="用户协议">用户协议</a></li>
+<li><a href="#" title="隐私条款">隐私条款</a></li>
+<li><a href="#" title="法律声明">法律声明</a></li>
+   </ul>
+     </div>
+  </div>
+  <div class="footer-credit clearfix ">
+     <h5>www.shangma.com 版权所有</h5>
+  </div>     
+    </div>
+ </footer>
+</div>
+</div>
+
+<script>
+$('ul.nav li.dropdown').hover(function() {
+  $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(200);
+}, function() {
+  $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(200);
+});
+</script>
+
+<script>
+$(document).ready(function(){
+    $("#question").click(function(){
+        $("#answer").toggle();
+        $("#question span").toggleClass("glyphicon glyphicon-menu-right glyphicon glyphicon-menu-down");
+    });
+        $("#question1").click(function(){
+        $("#answer1").toggle();
+        $("#question1 span").toggleClass("glyphicon glyphicon-menu-right glyphicon glyphicon-menu-down");
+    });
+        $("#question2").click(function(){
+        $("#answer2").toggle();
+        $("#question2 span").toggleClass("glyphicon glyphicon-menu-down glyphicon glyphicon-menu-right");
+    });
+});
+</script>
+ 
+<!-- Libraries -->
+<script src="../libs/angular.min.js"></script>
+<script src="../libs/angular-route.min.js"></script>
+<script src="../libs/angular-messages.min.js"></script>
+<script src="../js/modules/angular-cookies.js"></script>
+<script src="../js/dirPagination.js"> </script>
+<script src="../app.js"></script>
+<script src="../js/controllers/orderPayment.js"></script>
+</body>
+</html>
